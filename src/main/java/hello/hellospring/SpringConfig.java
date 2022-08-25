@@ -30,13 +30,14 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository(){
         //return new MemoryMemberRepository();
-        //return new JdbcMemberRepository(dataSource);
-        return new JdbcTemplateMemberRepository(dataSource);
+        return new JdbcMemberRepository(dataSource);
+        //return new JdbcTemplateMemberRepository(dataSource);
     }
 
+    /*
     @Bean
     public TimeTraceAop timeTraceAop(){
         return new TimeTraceAop();
     }
-
+    */
 }

@@ -1,32 +1,29 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
+@SpringBootTest
+@Transactional // Test case 용 connection rollback 처리
 class MemberServiceIntegrationTest {
 
+    @Autowired
     MemberService memberService;
-    MemoryMemberRepository repository;
-
-
-    @BeforeEach
-    public void beforeEach(){
-        repository = new MemoryMemberRepository();
-        memberService = new MemberService(repository);
-    }
-
-    @AfterEach
-    public void afterEach(){
-        repository.clearStore();
-    }
+    @Autowired
+    MemberRepository repository;
 
     @Test
     void 회원가입() {
