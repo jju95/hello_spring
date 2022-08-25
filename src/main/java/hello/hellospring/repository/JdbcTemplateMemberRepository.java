@@ -15,11 +15,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+// jdbcTemlate 반복코드 제거해준다. 프레임워크
+
 public class JdbcTemplateMemberRepository implements MemberRepository{
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Autowired
+    // 생성자 하나인 경우 autowired 생략 가능
     public JdbcTemplateMemberRepository (DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
@@ -28,8 +30,10 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
     public Member save(Member member) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("member").usingGeneratedKeyColumns("id");
+
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("name", member.getName());
+
         Number key = jdbcInsert.executeAndReturnKey(new
                 MapSqlParameterSource(parameters));
         member.setId(key.longValue());
@@ -44,7 +48,7 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
 
     @Override
     public Optional<Member> findByName(String name) {
-        List<Member> result =  jdbcTemplate.query("select * from member where name = ?", memberRowMapper() );
+        List<Member> result =  jdbcTemplate.query("select * from member where name = ?", memberRowMapper() , name);
         return result.stream().findAny();
     }
 
