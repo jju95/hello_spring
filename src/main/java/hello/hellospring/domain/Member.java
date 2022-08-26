@@ -1,9 +1,7 @@
 package hello.hellospring.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Member {
@@ -24,9 +22,10 @@ public class Member {
         this.name = name;
     }
 
-
-    @Id @GeneratedValue()
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment처럼 db가 알아서 pk값을 올려줄때를 identity 전략이라 부름
     private Long id;
+
+    // @Column(name = "testname") => db column name의 명칭을 소스에서 매핑시켜줄때 사용하는 어노테이션
     private  String name;
 
 }

@@ -21,8 +21,9 @@ dependencies {
 
 	// mysql connect
 	//implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.5.5'
+	//implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.5.5'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.3'
 	implementation("mysql:mysql-connector-java:5.1.46")
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
